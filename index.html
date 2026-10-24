@@ -1,214 +1,333 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ТропаВольных — Турслет 2024</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* Базовые настройки */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; color: #333; line-height: 1.6; }
-        
-        /* Шапка с параллаксом */
-        header {
-            position: relative;
-            background: linear-gradient(135deg, rgba(0,40,20,0.85) 0%, rgba(0,60,30,0.6) 100%), 
-                        url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
-            color: white; text-align: center; padding: 140px 20px; 
-            display: flex; flex-direction: column; justify-content: center; min-height: 70vh;
-        }
-        header h1 { font-size: 4rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 4px; font-weight: 900; text-shadow: 2px 5px 15px rgba(0,0,0,0.6); }
-        header p { font-size: 1.4rem; font-weight: 300; max-width: 700px; margin: 0 auto; text-shadow: 1px 2px 5px rgba(0,0,0,0.5); }
-        
-        /* Кнопка в шапке */
-        .btn-scroll {
-            display: inline-block; margin-top: 30px; padding: 15px 40px; background: #e67e22; color: white;
-            text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
-            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
-        }
-        .btn-scroll:hover { background: #d35400; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TourCamp Online — Adventure Awaits</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  body { background: #0f1419; color: #e6e6e6; line-height: 1.6; }
 
-        /* Секция преимуществ */
-        .features { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
-        .features h2 { text-align: center; font-size: 2.8rem; color: #2c5e3b; margin-bottom: 60px; font-weight: 700; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        
-        /* Карточки */
-        .card {
-            background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; 
-            display: flex; flex-direction: column;
-        }
-        .card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
-        .card img { width: 100%; height: 240px; object-fit: cover; transition: transform 0.5s ease; }
-        .card:hover img { transform: scale(1.05); }
-        .img-wrapper { overflow: hidden; } /* Для зума картинки */
-        .card-content { padding: 30px; flex-grow: 1; }
-        .card-content h3 { color: #2c5e3b; margin-bottom: 15px; font-size: 1.5rem; font-weight: 700; }
-        .card-content p { color: #666; font-size: 1.05rem; line-height: 1.7; }
+  /* HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,20,25,0.95); backdrop-filter: blur(10px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 40px; border-bottom: 1px solid #1f2933;
+  }
+  header h1 { font-size: 24px; color: #4ade80; letter-spacing: 1px; }
+  header nav a {
+    color: #cbd5e1; text-decoration: none; margin-left: 25px; font-size: 15px;
+    transition: color .3s;
+  }
+  header nav a:hover { color: #4ade80; }
 
-        /* Секция регистрации */
-        .register-section { 
-            background: linear-gradient(135deg, #1e3c29 0%, #2c5e3b 100%); 
-            color: white; padding: 100px 20px; text-align: center; 
-        }
-        .register-section h2 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 700; }
-        .register-section p { margin-bottom: 50px; font-weight: 300; font-size: 1.2rem; color: #d1e0d6; }
-        
-        /* Форма */
-        .form-container {
-            background: rgba(255, 255, 255, 0.95); max-width: 550px; margin: 0 auto; padding: 50px; 
-            border-radius: 20px; color: #333; box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: left;
-            backdrop-filter: blur(10px);
-        }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: #2c5e3b; }
-        .form-group input {
-            width: 100%; padding: 18px; border: 2px solid #e1e8e4; border-radius: 12px; font-size: 1rem; font-family: inherit;
-            transition: all 0.3s ease; background: #f8f9fa;
-        }
-        .form-group input:focus { outline: none; border-color: #2c5e3b; background: white; box-shadow: 0 0 0 4px rgba(44, 94, 59, 0.1); }
-        
-        button.submit-btn {
-            background-color: #e67e22; color: white; border: none; padding: 20px; font-size: 1.2rem;
-            border-radius: 12px; cursor: pointer; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        button.submit-btn:hover { background-color: #d35400; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3); }
-        button.submit-btn:active { transform: scale(0.98); }
+  /* HERO */
+  .hero {
+    height: 70vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+      url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600') center/cover;
+    padding: 20px;
+  }
+  .hero h2 { font-size: 52px; margin-bottom: 15px; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+  .hero p { font-size: 20px; color: #d1d5db; max-width: 700px; margin-bottom: 30px; }
+  .btn {
+    background: #4ade80; color: #0f1419; padding: 14px 34px; border: none;
+    border-radius: 50px; font-size: 17px; font-weight: 700; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(74,222,128,0.4); }
 
-        /* Подвал */
-        footer { background-color: #0d1a12; color: #88998d; text-align: center; padding: 40px; font-size: 0.9rem; }
-        footer p { margin-bottom: 5px; }
+  /* TOURS GRID */
+  .section-title { text-align: center; font-size: 36px; margin: 60px 0 15px; color: #fff; }
+  .section-sub { text-align: center; color: #94a3b8; margin-bottom: 50px; }
+  .tours {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; padding: 0 40px 80px; max-width: 1300px; margin: 0 auto;
+  }
+  .card {
+    background: #1a2332; border-radius: 16px; overflow: hidden;
+    transition: transform .3s, box-shadow .3s; border: 1px solid #263445;
+  }
+  .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  .card img { width: 100%; height: 200px; object-fit: cover; }
+  .card-body { padding: 22px; }
+  .card-body h3 { font-size: 22px; color: #4ade80; margin-bottom: 10px; }
+  .card-body p { color: #94a3b8; font-size: 15px; margin-bottom: 18px; }
+  .price { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 15px; }
+  .price span { font-size: 14px; color: #94a3b8; font-weight: 400; }
+  .buy-btn {
+    width: 100%; padding: 12px; background: #4ade80; border: none;
+    border-radius: 10px; font-size: 16px; font-weight: 700; color: #0f1419;
+    cursor: pointer; transition: background .3s;
+  }
+  .buy-btn:hover { background: #22c55e; }
 
-        /* Модальное окно успеха */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000;
-            backdrop-filter: blur(8px);
-        }
-        .modal-content {
-            background: white; padding: 50px 40px; border-radius: 20px; text-align: center;
-            max-width: 450px; width: 90%; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-content h2 { color: #2c5e3b; margin-bottom: 15px; font-size: 2.2rem; }
-        .modal-content p { margin-bottom: 30px; color: #555; font-size: 1.1rem; }
-        .modal-content button {
-            background-color: #2c5e3b; color: white; border: none; padding: 15px 40px;
-            font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 700; transition: background 0.3s;
-        }
-        .modal-content button:hover { background-color: #1e3c29; }
-        
-        /* Адаптивность для телефонов */
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5rem; }
-            header p { font-size: 1.1rem; }
-            .features h2 { font-size: 2.2rem; }
-            .form-container { padding: 30px; }
-            .register-section h2 { font-size: 2rem; }
-        }
-    </style>
+  /* MODAL */
+  .overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(6px);
+    justify-content: center; align-items: center; padding: 20px;
+  }
+  .overlay.active { display: flex; }
+  .modal {
+    background: #1a2332; border-radius: 16px; padding: 35px;
+    width: 100%; max-width: 440px; border: 1px solid #263445;
+    animation: pop .3s ease;
+  }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal h3 { color: #4ade80; margin-bottom: 20px; font-size: 22px; }
+  .modal label { display: block; margin-top: 14px; margin-bottom: 6px; color: #cbd5e1; font-size: 14px; }
+  .modal input {
+    width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155;
+    background: #0f1419; color: #fff; font-size: 15px; outline: none;
+  }
+  .modal input:focus { border-color: #4ade80; }
+  .modal .btn { width: 100%; margin-top: 22px; }
+  .close-x {
+    float: right; cursor: pointer; color: #94a3b8; font-size: 22px;
+    line-height: 1; background: none; border: none;
+  }
+  .close-x:hover { color: #fff; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 40px; color: #64748b;
+    border-top: 1px solid #1f2933; font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .hero h2 { font-size: 34px; }
+    header { padding: 15px 20px; }
+    header nav a { margin-left: 12px; font-size: 13px; }
+    .tours { padding: 0 20px 60px; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>ТропаВольных</h1>
-        <p>Твой главный турслет года. Природа, костры, экстрим и настоящие эмоции.</p>
-        <a href="#register" class="btn-scroll">Хочу к вам!</a>
-    </header>
+<header>
+  <h1>🏔️ TourCamp Online</h1>
+  <nav>
+    <a href="#tours">Tours</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-    <section class="features">
-        <h2>Что тебя ждет?</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Палатки">
-                </div>
-                <div class="card-content">
-                    <h3>Жизнь в палатках</h3>
-                    <p>Единение с природой, утренний кофе на костре и звездное небо над головой. Вкус настоящей свободы и романтика походной жизни.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Походы">
-                </div>
-                <div class="card-content">
-                    <h3>Активные маршруты</h3>
-                    <p>Квесты, спортивное ориентирование, полосы препятствий и пешие походы по живописным местам. Проверь свою силу и выносливость!</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1517168304346-6103537c5933?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Костёр">
-                </div>
-                <div class="card-content">
-                    <h3>Вечерние костры</h3>
-                    <p>Гитары, песни, теплые разговоры и новые знакомства в кругу единомышленников. Атмосфера уюта, которую невозможно забыть.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero">
+  <h2>Adventure Awaits You</h2>
+  <p>Discover breathtaking hiking trails, mountain camps and unforgettable outdoor experiences — all bookable online in minutes.</p>
+  <button class="btn" onclick="document.getElementById('tours').scrollIntoView({behavior:'smooth'})">Explore Tours</button>
+</section>
 
-    <section class="register-section" id="register">
-        <h2>Готов присоединиться?</h2>
-        <p>Оставь свой email, и мы вышлем все детали участия и программу.</p>
-        
-        <div class="form-container">
-            <form id="regForm">
-                <div class="form-group">
-                    <label for="name">Ваше имя:</label>
-                    <input type="text" id="name" placeholder="Как вас зовут?" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email для связи:</label>
-                    <input type="email" id="email" placeholder="your@mail.com" required>
-                </div>
-                <button type="submit" class="submit-btn">Зарегистрироваться</button>
-            </form>
-        </div>
-    </section>
+<h2 class="section-title" id="tours">Our Tours</h2>
+<p class="section-sub">Choose your next adventure — prices from $250 to $1400</p>
 
-    <footer>
-        <p>&copy; 2024 ТропаВольных. Все права защищены.</p>
-        <p>Сделано с любовью к природе и активному отдыху.</p>
-    </footer>
+<div class="tours" id="tourGrid"></div>
 
-    <div class="modal" id="successModal">
-        <div class="modal-content">
-            <h2>Ура! Вы в деле! 🏕️</h2>
-            <p>Мы получили вашу заявку. Проверьте почту <strong id="userEmail"></strong> — мы скоро пришлем детали.</p>
-            <button onclick="closeModal()">Отлично</button>
-        </div>
+<footer id="contact">
+  © 2025 TourCamp Online. All rights reserved. &nbsp;|&nbsp; support@tourcamp.online
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal()">✕</button>
+    <h3 id="modalTitle">Register</h3>
+    <div id="formArea"></div>
+  </div>
+</div>
+
+<script>
+/* ========== TOUR DATA ========== */
+const tours = [
+  {
+    id: 1,
+    name: "Forest Trail Weekend",
+    price: 250,
+    desc: "A relaxing 2-day guided hike through pine forests with campfire nights and stargazing.",
+    img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800"
+  },
+  {
+    id: 2,
+    name: "Mountain Lake Camp",
+    price: 420,
+    desc: "3 days by a crystal-clear alpine lake: kayaking, fishing and sunrise yoga on the shore.",
+    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+  },
+  {
+    id: 3,
+    name: "Rocky Ridge Expedition",
+    price: 680,
+    desc: "5-day trek across rugged ridges with professional guides, tents and all meals included.",
+    img: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800"
+  },
+  {
+    id: 4,
+    name: "Desert Canyon Adventure",
+    price: 890,
+    desc: "4 days exploring red canyons, night skies and ancient trails with 4x4 support vehicle.",
+    img: "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=800"
+  },
+  {
+    id: 5,
+    name: "Alpine Summit Challenge",
+    price: 1150,
+    desc: "7-day high-altitude expedition to a 4000m peak. For experienced hikers ready to level up.",
+    img: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800"
+  },
+  {
+    id: 6,
+    name: "Northern Lights Safari",
+    price: 1400,
+    desc: "Ultimate 6-day arctic adventure: husky sledding, glass igloos and the aurora borealis.",
+    img: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=800"
+  }
+];
+
+/* ========== RENDER CARDS ========== */
+const grid = document.getElementById('tourGrid');
+tours.forEach(t => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img src="${t.img}" alt="${t.name}">
+    <div class="card-body">
+      <h3>${t.name}</h3>
+      <p>${t.desc}</p>
+      <div class="price">$${t.price} <span>/ person</span></div>
+      <button class="buy-btn" onclick="startPurchase(${t.id})">Buy Now</button>
     </div>
+  `;
+  grid.appendChild(card);
+});
 
-    <script>
-        const form = document.getElementById('regForm');
-        const modal = document.getElementById('successModal');
-        const userEmailSpan = document.getElementById('userEmail');
+/* ========== MODAL LOGIC ========== */
+const overlay = document.getElementById('overlay');
+const modalTitle = document.getElementById('modalTitle');
+const formArea = document.getElementById('formArea');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            userEmailSpan.textContent = email;
-            modal.style.display = 'flex';
-            form.reset();
-        });
+let currentTour = null;
+let currentUser = null;
 
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-        
-        // Закрытие по клику вне окна
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
+function openModal(title) {
+  modalTitle.textContent = title;
+  overlay.classList.add('active');
+}
+function closeModal() {
+  overlay.classList.remove('active');
+  formArea.innerHTML = '';
+}
+
+/* STEP 1: Registration */
+function startPurchase(tourId) {
+  currentTour = tours.find(t => t.id === tourId);
+  modalTitle.textContent = 'Create Account';
+  formArea.innerHTML = `
+    <p style="color:#94a3b8;font-size:14px;margin-bottom:10px;">
+      You're booking: <b style="color:#4ade80">${currentTour.name}</b> — $${currentTour.price}
+    </p>
+    <label>Full Name</label>
+    <input type="text" id="regName" placeholder="John Doe">
+    <label>Email</label>
+    <input type="email" id="regEmail" placeholder="john@example.com">
+    <label>Password</label>
+    <input type="password" id="regPass" placeholder="••••••••">
+    <button class="btn" onclick="submitRegistration()">Continue to Payment</button>
+  `;
+  openModal('Create Account');
+}
+
+/* STEP 2: Payment */
+function submitRegistration() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value.trim();
+
+  if (!name || !email || !pass) { alert('Please fill in all fields.'); return; }
+  if (!email.includes('@')) { alert('Please enter a valid email.'); return; }
+
+  currentUser = { name, email };
+  showPayment();
+}
+
+function showPayment() {
+  modalTitle.textContent = 'Payment';
+  formArea.innerHTML = `
+    <p style="color:#94a3b8;font-size:14px;margin-bottom:10px;">
+      Paying for: <b style="color:#4ade80">${currentTour.name}</b><br>
+      Total: <b style="color:#fff">$${currentTour.price}</b>
+    </p>
+    <label>Card Number</label>
+    <input type="text" id="cardNum" value="4242 4242 4242 4242" maxlength="19">
+    <label>Expiry</label>
+    <input type="text" id="cardExp" value="12/28" maxlength="5">
+    <label>CVV</label>
+    <input type="text" id="cardCvv" value="123" maxlength="3">
+    <label>Email for confirmation</label>
+    <input type="email" id="payEmail" value="${currentUser.email}">
+    <button class="btn" onclick="processPayment()">Pay $${currentTour.price}</button>
+  `;
+}
+
+/* STEP 3: Success + random code */
+function processPayment() {
+  const cardNum = document.getElementById('cardNum').value.replace(/\s/g,'');
+  const payEmail = document.getElementById('payEmail').value.trim();
+
+  if (cardNum.length < 15) { alert('Invalid card number.'); return; }
+  if (!payEmail.includes('@')) { alert('Invalid email.'); return; }
+
+  const bookingCode = generateCode();
+
+  // Save order locally (simulation)
+  const orders = JSON.parse(localStorage.getItem('tourOrders') || '[]');
+  orders.push({
+    user: currentUser.name,
+    email: payEmail,
+    tour: currentTour.name,
+    price: currentTour.price,
+    code: bookingCode,
+    date: new Date().toISOString()
+  });
+  localStorage.setItem('tourOrders', JSON.stringify(orders));
+
+  // Success screen
+  modalTitle.textContent = '✅ Payment Successful';
+  formArea.innerHTML = `
+    <p style="color:#cbd5e1;font-size:15px;margin-bottom:15px;">
+      Thank you, <b style="color:#4ade80">${currentUser.name}</b>!<br>
+      Your booking for <b>${currentTour.name}</b> is confirmed.
+    </p>
+    <div style="background:#0f1419;padding:20px;border-radius:10px;text-align:center;margin-bottom:15px;">
+      <p style="color:#94a3b8;font-size:13px;margin-bottom:8px;">Your Booking Code</p>
+      <p style="color:#4ade80;font-size:28px;font-weight:800;letter-spacing:3px;">${bookingCode}</p>
+    </div>
+    <p style="color:#94a3b8;font-size:14px;">
+      A confirmation with your <b>virtual pass</b> and booking details has been sent to 
+      <b style="color:#fff">${payEmail}</b>.<br><br>
+      Present this code at check-in. Safe travels! 🏕️
+    </p>
+    <button class="btn" onclick="closeModal()">Done</button>
+  `;
+}
+
+/* Random booking code */
+function generateCode() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = 'TC-';
+  for (let i = 0; i < 8; i++) {
+    if (i === 4) code += '-';
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+}
+
+/* Close modal on overlay click */
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+</script>
+
 </body>
 </html>
