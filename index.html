@@ -4,193 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ТропаВольных — Турслет 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Базовые стили */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
-        }
+        /* Базовые настройки */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; color: #333; line-height: 1.6; }
         
-        /* Шапка */
+        /* Шапка с параллаксом */
         header {
-            background: linear-gradient(rgba(0, 50, 20, 0.7), rgba(0, 80, 40, 0.7)), url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0,40,20,0.85) 0%, rgba(0,60,30,0.6) 100%), 
+                        url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            color: white; text-align: center; padding: 140px 20px; 
+            display: flex; flex-direction: column; justify-content: center; min-height: 70vh;
         }
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        header h1 { font-size: 4rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 4px; font-weight: 900; text-shadow: 2px 5px 15px rgba(0,0,0,0.6); }
+        header p { font-size: 1.4rem; font-weight: 300; max-width: 700px; margin: 0 auto; text-shadow: 1px 2px 5px rgba(0,0,0,0.5); }
+        
+        /* Кнопка в шапке */
+        .btn-scroll {
+            display: inline-block; margin-top: 30px; padding: 15px 40px; background: #e67e22; color: white;
+            text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
         }
-        header p {
-            font-size: 1.2rem;
-            font-weight: 300;
-        }
+        .btn-scroll:hover { background: #d35400; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6); }
 
-        /* Секция "Что такое турслет" */
-        .features {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .features h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #2c5e3b;
-            margin-bottom: 40px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+        /* Секция преимуществ */
+        .features { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .features h2 { text-align: center; font-size: 2.8rem; color: #2c5e3b; margin-bottom: 60px; font-weight: 700; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        
+        /* Карточки */
         .card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; 
+            display: flex; flex-direction: column;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 20px;
-        }
-        .card-content h3 {
-            color: #d35400;
-            margin-top: 0;
-        }
+        .card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        .card img { width: 100%; height: 240px; object-fit: cover; transition: transform 0.5s ease; }
+        .card:hover img { transform: scale(1.05); }
+        .img-wrapper { overflow: hidden; } /* Для зума картинки */
+        .card-content { padding: 30px; flex-grow: 1; }
+        .card-content h3 { color: #2c5e3b; margin-bottom: 15px; font-size: 1.5rem; font-weight: 700; }
+        .card-content p { color: #666; font-size: 1.05rem; line-height: 1.7; }
 
         /* Секция регистрации */
-        .register-section {
-            background-color: #2c5e3b;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
+        .register-section { 
+            background: linear-gradient(135deg, #1e3c29 0%, #2c5e3b 100%); 
+            color: white; padding: 100px 20px; text-align: center; 
         }
-        .register-section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
+        .register-section h2 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 700; }
+        .register-section p { margin-bottom: 50px; font-weight: 300; font-size: 1.2rem; color: #d1e0d6; }
+        
+        /* Форма */
         .form-container {
-            background: white;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 15px;
-            color: #333;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.95); max-width: 550px; margin: 0 auto; padding: 50px; 
+            border-radius: 20px; color: #333; box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: left;
+            backdrop-filter: blur(10px);
         }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: #2c5e3b; }
         .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
+            width: 100%; padding: 18px; border: 2px solid #e1e8e4; border-radius: 12px; font-size: 1rem; font-family: inherit;
+            transition: all 0.3s ease; background: #f8f9fa;
         }
-        button {
-            background-color: #e67e22;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: background 0.3s;
+        .form-group input:focus { outline: none; border-color: #2c5e3b; background: white; box-shadow: 0 0 0 4px rgba(44, 94, 59, 0.1); }
+        
+        button.submit-btn {
+            background-color: #e67e22; color: white; border: none; padding: 20px; font-size: 1.2rem;
+            border-radius: 12px; cursor: pointer; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
-        button:hover {
-            background-color: #d35400;
-        }
+        button.submit-btn:hover { background-color: #d35400; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3); }
+        button.submit-btn:active { transform: scale(0.98); }
 
-        /* Футер */
-        footer {
-            background-color: #111;
-            color: #777;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
+        /* Подвал */
+        footer { background-color: #0d1a12; color: #88998d; text-align: center; padding: 40px; font-size: 0.9rem; }
+        footer p { margin-bottom: 5px; }
 
         /* Модальное окно успеха */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(8px);
         }
         .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 400px;
+            background: white; padding: 50px 40px; border-radius: 20px; text-align: center;
+            max-width: 450px; width: 90%; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-content h2 { color: #2c5e3b; margin-bottom: 15px; font-size: 2.2rem; }
+        .modal-content p { margin-bottom: 30px; color: #555; font-size: 1.1rem; }
+        .modal-content button {
+            background-color: #2c5e3b; color: white; border: none; padding: 15px 40px;
+            font-size: 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 700; transition: background 0.3s;
+        }
+        .modal-content button:hover { background-color: #1e3c29; }
+        
+        /* Адаптивность для телефонов */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1.1rem; }
+            .features h2 { font-size: 2.2rem; }
+            .form-container { padding: 30px; }
+            .register-section h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Шапка сайта -->
     <header>
         <h1>ТропаВольных</h1>
-        <p>Твой главный турслет года. Природа, костры и настоящие эмоции.</p>
+        <p>Твой главный турслет года. Природа, костры, экстрим и настоящие эмоции.</p>
+        <a href="#register" class="btn-scroll">Хочу к вам!</a>
     </header>
 
-    <!-- Блок с картинками -->
     <section class="features">
         <h2>Что тебя ждет?</h2>
         <div class="grid">
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Палатки">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Палатки">
+                </div>
                 <div class="card-content">
                     <h3>Жизнь в палатках</h3>
-                    <p>Почувствуй единение с природой. Уютные места под звездным небом, утренний кофе на костре и свежий воздух.</p>
+                    <p>Единение с природой, утренний кофе на костре и звездное небо над головой. Вкус настоящей свободы и романтика походной жизни.</p>
                 </div>
             </div>
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Походы">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Походы">
+                </div>
                 <div class="card-content">
                     <h3>Активные маршруты</h3>
-                    <p>Квесты, спортивное ориентирование, полосы препятствий и пешие походы по живописным местам.</p>
+                    <p>Квесты, спортивное ориентирование, полосы препятствий и пешие походы по живописным местам. Проверь свою силу и выносливость!</p>
                 </div>
             </div>
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1517168304346-6103537c5933?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Костёр">
+                <div class="img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1517168304346-6103537c5933?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Костёр">
+                </div>
                 <div class="card-content">
                     <h3>Вечерние костры</h3>
-                    <p>Гитары, песни, теплые разговоры и новые знакомства. Атмосфера, которую невозможно забыть.</p>
+                    <p>Гитары, песни, теплые разговоры и новые знакомства в кругу единомышленников. Атмосфера уюта, которую невозможно забыть.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Форма регистрации -->
     <section class="register-section" id="register">
         <h2>Готов присоединиться?</h2>
         <p>Оставь свой email, и мы вышлем все детали участия и программу.</p>
@@ -199,52 +162,52 @@
             <form id="regForm">
                 <div class="form-group">
                     <label for="name">Ваше имя:</label>
-                    <input type="text" id="name" placeholder="Иван" required>
+                    <input type="text" id="name" placeholder="Как вас зовут?" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email для связи:</label>
-                    <input type="email" id="email" placeholder="ivan@mail.com" required>
+                    <input type="email" id="email" placeholder="your@mail.com" required>
                 </div>
-                <button type="submit">Зарегистрироваться</button>
+                <button type="submit" class="submit-btn">Зарегистрироваться</button>
             </form>
         </div>
     </section>
 
-    <!-- Подвал -->
     <footer>
         <p>&copy; 2024 ТропаВольных. Все права защищены.</p>
-        <p>Сделано с любовью к природе.</p>
+        <p>Сделано с любовью к природе и активному отдыху.</p>
     </footer>
 
-    <!-- Модальное окно (всплывашка) -->
     <div class="modal" id="successModal">
         <div class="modal-content">
-            <h2 style="color: #2c5e3b;">Успешно! 🏕️</h2>
-            <p>Мы получили вашу заявку. Проверьте почту <strong id="userEmail"></strong> в ближайшее время!</p>
-            <button onclick="closeModal()" style="background-color: #2c5e3b;">Отлично</button>
+            <h2>Ура! Вы в деле! 🏕️</h2>
+            <p>Мы получили вашу заявку. Проверьте почту <strong id="userEmail"></strong> — мы скоро пришлем детали.</p>
+            <button onclick="closeModal()">Отлично</button>
         </div>
     </div>
 
-    <!-- Скрипт для обработки формы -->
     <script>
         const form = document.getElementById('regForm');
         const modal = document.getElementById('successModal');
         const userEmailSpan = document.getElementById('userEmail');
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Останавливаем перезагрузку страницы
-            
+            e.preventDefault();
             const email = document.getElementById('email').value;
-            
-            // Имитация отправки данных (в будущем здесь можно подключить сервис рассылок)
             userEmailSpan.textContent = email;
             modal.style.display = 'flex';
-            
-            form.reset(); // Очищаем поля формы
+            form.reset();
         });
 
         function closeModal() {
             modal.style.display = 'none';
+        }
+        
+        // Закрытие по клику вне окна
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
