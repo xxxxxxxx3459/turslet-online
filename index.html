@@ -1,333 +1,1403 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TourCamp Online — Adventure Awaits</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-  body { background: #0f1419; color: #e6e6e6; line-height: 1.6; }
 
-  /* HEADER */
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(15,20,25,0.95); backdrop-filter: blur(10px);
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 40px; border-bottom: 1px solid #1f2933;
-  }
-  header h1 { font-size: 24px; color: #4ade80; letter-spacing: 1px; }
-  header nav a {
-    color: #cbd5e1; text-decoration: none; margin-left: 25px; font-size: 15px;
-    transition: color .3s;
-  }
-  header nav a:hover { color: #4ade80; }
+  <meta charset="UTF-8">
 
-  /* HERO */
-  .hero {
-    height: 70vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
-      url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600') center/cover;
-    padding: 20px;
-  }
-  .hero h2 { font-size: 52px; margin-bottom: 15px; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,0.8); }
-  .hero p { font-size: 20px; color: #d1d5db; max-width: 700px; margin-bottom: 30px; }
-  .btn {
-    background: #4ade80; color: #0f1419; padding: 14px 34px; border: none;
-    border-radius: 50px; font-size: 17px; font-weight: 700; cursor: pointer;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(74,222,128,0.4); }
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  /* TOURS GRID */
-  .section-title { text-align: center; font-size: 36px; margin: 60px 0 15px; color: #fff; }
-  .section-sub { text-align: center; color: #94a3b8; margin-bottom: 50px; }
-  .tours {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; padding: 0 40px 80px; max-width: 1300px; margin: 0 auto;
-  }
-  .card {
-    background: #1a2332; border-radius: 16px; overflow: hidden;
-    transition: transform .3s, box-shadow .3s; border: 1px solid #263445;
-  }
-  .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-  .card img { width: 100%; height: 200px; object-fit: cover; }
-  .card-body { padding: 22px; }
-  .card-body h3 { font-size: 22px; color: #4ade80; margin-bottom: 10px; }
-  .card-body p { color: #94a3b8; font-size: 15px; margin-bottom: 18px; }
-  .price { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 15px; }
-  .price span { font-size: 14px; color: #94a3b8; font-weight: 400; }
-  .buy-btn {
-    width: 100%; padding: 12px; background: #4ade80; border: none;
-    border-radius: 10px; font-size: 16px; font-weight: 700; color: #0f1419;
-    cursor: pointer; transition: background .3s;
-  }
-  .buy-btn:hover { background: #22c55e; }
+  <meta name="theme-color" content="#101c18">
 
-  /* MODAL */
-  .overlay {
-    display: none; position: fixed; inset: 0; z-index: 200;
-    background: rgba(0,0,0,0.8); backdrop-filter: blur(6px);
-    justify-content: center; align-items: center; padding: 20px;
-  }
-  .overlay.active { display: flex; }
-  .modal {
-    background: #1a2332; border-radius: 16px; padding: 35px;
-    width: 100%; max-width: 440px; border: 1px solid #263445;
-    animation: pop .3s ease;
-  }
-  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .modal h3 { color: #4ade80; margin-bottom: 20px; font-size: 22px; }
-  .modal label { display: block; margin-top: 14px; margin-bottom: 6px; color: #cbd5e1; font-size: 14px; }
-  .modal input {
-    width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334155;
-    background: #0f1419; color: #fff; font-size: 15px; outline: none;
-  }
-  .modal input:focus { border-color: #4ade80; }
-  .modal .btn { width: 100%; margin-top: 22px; }
-  .close-x {
-    float: right; cursor: pointer; color: #94a3b8; font-size: 22px;
-    line-height: 1; background: none; border: none;
-  }
-  .close-x:hover { color: #fff; }
+  <meta name="description" content="Discover extraordinary outdoor gatherings, curated adventure trips and unforgettable travel experiences.">
 
-  /* FOOTER */
-  footer {
-    text-align: center; padding: 40px; color: #64748b;
-    border-top: 1px solid #1f2933; font-size: 14px;
-  }
+  <title>WILDER — Extraordinary Journeys</title>
 
-  @media (max-width: 600px) {
-    .hero h2 { font-size: 34px; }
-    header { padding: 15px 20px; }
-    header nav a { margin-left: 12px; font-size: 13px; }
-    .tours { padding: 0 20px 60px; }
-  }
-</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+
+      --bg: #f7f6f1;
+
+      --ink: #17251e;
+
+      --green: #244a38;
+
+      --lime: #d6f078;
+
+      --muted: #72786f;
+
+      --white: #fff;
+
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+
+      background: var(--bg);
+
+      color: var(--ink);
+
+      font-family: "DM Sans", sans-serif;
+
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, input, select { font: inherit; }
+
+    .nav {
+
+      height: 76px;
+
+      padding: 0 7%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      background: var(--bg);
+
+    }
+
+    .logo {
+
+      font-size: 26px;
+
+      font-weight: 700;
+
+      letter-spacing: 5px;
+
+    }
+
+    .nav-links {
+
+      display: flex;
+
+      gap: 30px;
+
+      font-size: 13px;
+
+      color: #505950;
+
+    }
+
+    .nav-cta {
+
+      background: var(--green);
+
+      color: white;
+
+      padding: 13px 20px;
+
+      border-radius: 30px;
+
+      font-size: 12px;
+
+    }
+
+    .hero {
+
+      min-height: 590px;
+
+      padding: 100px 8%;
+
+      display: flex;
+
+      align-items: center;
+
+      color: white;
+
+      background:
+
+        linear-gradient(90deg, rgba(8,22,15,.82), rgba(8,22,15,.12)),
+
+        url("https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=2000&q=85")
+
+        center 48% / cover;
+
+    }
+
+    .hero-content { max-width: 670px; }
+
+    .eyebrow {
+
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      color: var(--lime);
+
+      margin-bottom: 24px;
+
+    }
+
+    h1, h2, .serif {
+
+      font-family: "Playfair Display", Georgia, serif;
+
+      font-weight: 500;
+
+    }
+
+    h1 {
+
+      font-size: clamp(44px, 7vw, 82px);
+
+      line-height: 1.06;
+
+      margin-bottom: 24px;
+
+    }
+
+    .hero p {
+
+      font-size: 16px;
+
+      line-height: 1.8;
+
+      max-width: 490px;
+
+      color: #e1e7df;
+
+    }
+
+    .hero-actions {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin-top: 32px;
+
+    }
+
+    .btn {
+
+      border: 0;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      border-radius: 30px;
+
+      padding: 15px 23px;
+
+      font-weight: 700;
+
+      font-size: 13px;
+
+      transition: .2s;
+
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-lime { background: var(--lime); color: var(--ink); }
+
+    .btn-outline { border: 1px solid #ffffff80; color: white; }
+
+    .trust {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 26px;
+
+      padding: 25px 8%;
+
+      background: #eaece4;
+
+      font-size: 12px;
+
+      color: #465348;
+
+    }
+
+    .section { padding: 85px 8%; }
+
+    .section-top {
+
+      display: flex;
+
+      align-items: end;
+
+      justify-content: space-between;
+
+      gap: 24px;
+
+      margin-bottom: 35px;
+
+    }
+
+    h2 {
+
+      font-size: clamp(34px, 4vw, 49px);
+
+      line-height: 1.15;
+
+    }
+
+    .section-desc {
+
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      font-size: 14px;
+
+      max-width: 410px;
+
+      margin-top: 13px;
+
+    }
+
+    .filters {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+
+      margin-bottom: 30px;
+
+    }
+
+    .filter {
+
+      border: 1px solid #d9ddd3;
+
+      background: transparent;
+
+      border-radius: 25px;
+
+      padding: 10px 17px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+
+    }
+
+    .filter.active {
+
+      background: var(--green);
+
+      border-color: var(--green);
+
+      color: white;
+
+    }
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      gap: 23px;
+
+    }
+
+    .tour {
+
+      background: white;
+
+      border-radius: 17px;
+
+      overflow: hidden;
+
+      box-shadow: 0 5px 25px #17251e08;
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+    .tour-image {
+
+      position: relative;
+
+      height: 230px;
+
+      overflow: hidden;
+
+      background: #dfe4d8;
+
+    }
+
+    .tour-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform .5s;
+
+    }
+
+    .tour:hover .tour-image img { transform: scale(1.05); }
+
+    .tag {
+
+      position: absolute;
+
+      left: 15px;
+
+      top: 15px;
+
+      padding: 8px 11px;
+
+      border-radius: 20px;
+
+      background: #ffffffed;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+    }
+
+    .tour-content {
+
+      padding: 22px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+
+    }
+
+    .location {
+
+      color: #738074;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 10px;
+
+    }
+
+    .tour h3 {
+
+      font-family: "Playfair Display", Georgia, serif;
+
+      font-weight: 500;
+
+      font-size: 25px;
+
+      margin-bottom: 10px;
+
+    }
+
+    .tour p {
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.8;
+
+    }
+
+    .tour-meta {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin: 20px 0;
+
+      font-size: 11px;
+
+      color: #657064;
+
+    }
+
+    .price-row {
+
+      border-top: 1px solid #eceee8;
+
+      padding-top: 18px;
+
+      margin-top: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+    }
+
+    .price-label { color: var(--muted); font-size: 10px; }
+
+    .price { font-size: 22px; font-weight: 700; margin-top: 3px; }
+
+    .buy {
+
+      background: var(--green);
+
+      color: white;
+
+      padding: 12px 15px;
+
+      border-radius: 25px;
+
+      border: 0;
+
+      cursor: pointer;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+    }
+
+    .about {
+
+      background: #172b20;
+
+      color: white;
+
+      padding: 80px 8%;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 60px;
+
+      align-items: center;
+
+    }
+
+    .about h2 { margin-bottom: 20px; }
+
+    .about p {
+
+      color: #c6d0c6;
+
+      font-size: 14px;
+
+      line-height: 1.9;
+
+      margin-bottom: 15px;
+
+    }
+
+    .steps { display: grid; gap: 24px; }
+
+    .step {
+
+      display: flex;
+
+      gap: 17px;
+
+      border-bottom: 1px solid #ffffff25;
+
+      padding-bottom: 22px;
+
+    }
+
+    .number {
+
+      color: var(--lime);
+
+      font-size: 22px;
+
+      font-family: "Playfair Display", Georgia, serif;
+
+    }
+
+    .step h3 { font-size: 15px; margin-bottom: 7px; }
+
+    .step p { margin: 0; font-size: 12px; }
+
+    .booking {
+
+      padding: 80px 8%;
+
+      text-align: center;
+
+    }
+
+    .booking p {
+
+      max-width: 550px;
+
+      margin: 18px auto 25px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.8;
+
+    }
+
+    footer {
+
+      padding: 35px 8%;
+
+      background: #101c15;
+
+      color: #c8d0c8;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+
+      font-size: 11px;
+
+    }
+
+    footer a { text-decoration: underline; }
+
+    .modal {
+
+      display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      background: #07140edb;
+
+      z-index: 10;
+
+      padding: 20px;
+
+      align-items: center;
+
+      justify-content: center;
+
+      overflow-y: auto;
+
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-box {
+
+      width: 100%;
+
+      max-width: 480px;
+
+      padding: 30px;
+
+      border-radius: 18px;
+
+      background: var(--bg);
+
+      position: relative;
+
+      margin: auto;
+
+    }
+
+    .close {
+
+      position: absolute;
+
+      right: 18px;
+
+      top: 15px;
+
+      border: 0;
+
+      background: transparent;
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+    }
+
+    .modal-box h2 { font-size: 31px; margin: 20px 0 10px; }
+
+    .modal-box > p { color: var(--muted); font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+
+    .field { margin-bottom: 15px; text-align: left; }
+
+    .field label {
+
+      display: block;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      margin-bottom: 7px;
+
+    }
+
+    .field input, .field select {
+
+      width: 100%;
+
+      padding: 13px;
+
+      border: 1px solid #d9ddd3;
+
+      background: white;
+
+      border-radius: 9px;
+
+      outline-color: var(--green);
+
+    }
+
+    .modal .btn { width: 100%; margin-top: 5px; }
+
+    .notice {
+
+      font-size: 11px;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      margin-top: 14px;
+
+    }
+
+    @media (max-width: 900px) {
+
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .about { grid-template-columns: 1fr; gap: 35px; }
+
+      .hero { min-height: 530px; }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .nav { height: 65px; padding: 0 5%; }
+
+      .logo { font-size: 22px; }
+
+      .nav-links { display: none; }
+
+      .nav-cta { padding: 11px 14px; }
+
+      .hero { padding: 80px 6%; min-height: 560px; }
+
+      .hero p { font-size: 14px; }
+
+      .trust { padding: 22px 6%; gap: 13px 20px; }
+
+      .section { padding: 60px 5%; }
+
+      .section-top { align-items: start; flex-direction: column; }
+
+      .grid { grid-template-columns: 1fr; }
+
+      .tour-image { height: 245px; }
+
+      .about, .booking { padding: 60px 6%; }
+
+      .modal-box { padding: 24px 19px; }
+
+    }
+
+  </style>
+
 </head>
+
 <body>
 
-<header>
-  <h1>🏔️ TourCamp Online</h1>
-  <nav>
-    <a href="#tours">Tours</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+  <header class="nav">
 
-<section class="hero">
-  <h2>Adventure Awaits You</h2>
-  <p>Discover breathtaking hiking trails, mountain camps and unforgettable outdoor experiences — all bookable online in minutes.</p>
-  <button class="btn" onclick="document.getElementById('tours').scrollIntoView({behavior:'smooth'})">Explore Tours</button>
-</section>
+    <a class="logo" href="#">WILDER<span style="color:#7a9d46">.</span></a>
 
-<h2 class="section-title" id="tours">Our Tours</h2>
-<p class="section-sub">Choose your next adventure — prices from $250 to $1400</p>
+    <nav class="nav-links">
 
-<div class="tours" id="tourGrid"></div>
+      <a href="#tours">Experiences</a>
 
-<footer id="contact">
-  © 2025 TourCamp Online. All rights reserved. &nbsp;|&nbsp; support@tourcamp.online
-</footer>
+      <a href="#about">How It Works</a>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <button class="close-x" onclick="closeModal()">✕</button>
-    <h3 id="modalTitle">Register</h3>
-    <div id="formArea"></div>
+      <a href="#booking">Contact</a>
+
+    </nav>
+
+    <a class="nav-cta" href="#tours">Explore Tours ↗</a>
+
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">Travel beyond the ordinary</div>
+
+        <h1>The world is<br>waiting for you.</h1>
+
+        <p>
+
+          Extraordinary outdoor gatherings, remote destinations,
+
+          and unforgettable adventures. Discover your next journey
+
+          with WILDER.
+
+        </p>
+
+        <div class="hero-actions">
+
+          <a href="#tours" class="btn btn-lime">Discover Experiences ↗</a>
+
+          <a href="#about" class="btn btn-outline">How it works</a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="trust">
+
+      <span>✦ Curated adventures</span>
+
+      <span>✦ Unique destinations</span>
+
+      <span>✦ Personal booking assistance</span>
+
+      <span>✦ Secure checkout when configured</span>
+
+    </div>
+
+    <section class="section" id="tours">
+
+      <div class="section-top">
+
+        <div>
+
+          <div class="eyebrow" style="color:#62834b">Find your next story</div>
+
+          <h2>Explore our experiences</h2>
+
+          <p class="section-desc">
+
+            From peaceful wilderness retreats to extraordinary
+
+            multi-day expeditions. Find an adventure that speaks to you.
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="filters">
+
+        <button class="filter active" data-filter="all">All experiences</button>
+
+        <button class="filter" data-filter="nature">Nature</button>
+
+        <button class="filter" data-filter="adventure">Adventure</button>
+
+        <button class="filter" data-filter="retreat">Retreats</button>
+
+      </div>
+
+      <div class="grid" id="tourGrid"></div>
+
+    </section>
+
+    <section class="about" id="about">
+
+      <div>
+
+        <div class="eyebrow">Your journey, your way</div>
+
+        <h2>Adventure begins<br>with a single step.</h2>
+
+        <p>
+
+          Choose an experience, send us your booking request,
+
+          and work with our team to confirm the dates, location,
+
+          availability, and travel arrangements.
+
+        </p>
+
+        <p>
+
+          Every trip is different. We help you understand the details
+
+          before your adventure begins.
+
+        </p>
+
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="number">01</div>
+
+          <div>
+
+            <h3>Choose your experience</h3>
+
+            <p>Explore our featured journeys and select the one you love.</p>
+
+          </div>
+
+        </div>
+
+        <div class="step">
+
+          <div class="number">02</div>
+
+          <div>
+
+            <h3>Submit your booking</h3>
+
+            <p>Share your contact details and preferred travel dates.</p>
+
+          </div>
+
+        </div>
+
+        <div class="step">
+
+          <div class="number">03</div>
+
+          <div>
+
+            <h3>Confirm the details</h3>
+
+            <p>Receive verified information about your destination and itinerary.</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="booking" id="booking">
+
+      <div class="eyebrow" style="color:#62834b">Something special in mind?</div>
+
+      <h2>Your adventure starts here.</h2>
+
+      <p>
+
+        Have a destination in mind? Contact us to discuss a custom
+
+        trip, available dates, pricing, and booking arrangements.
+
+      </p>
+
+      <button class="btn" style="background:#244a38;color:white"
+
+        onclick="openBooking('Custom trip')">
+
+        Request a custom trip ↗
+
+      </button>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <a class="logo" href="#" style="color:white">WILDER.</a>
+
+    <span>© <span id="year"></span> WILDER Travel. All rights reserved.</span>
+
+    <span><a href="mailto:YOUR_EMAIL@example.com">Contact us</a></span>
+
+  </footer>
+
+  <div class="modal" id="bookingModal" role="dialog"
+
+       aria-modal="true" aria-labelledby="modalTitle">
+
+    <div class="modal-box">
+
+      <button class="close" onclick="closeBooking()" aria-label="Close">×</button>
+
+      <div class="eyebrow" style="color:#62834b">Let's plan your journey</div>
+
+      <h2 id="modalTitle">Reserve your experience</h2>
+
+      <p id="selectedTour">Tell us a little about your trip.</p>
+
+      <form id="bookingForm">
+
+        <div class="field">
+
+          <label for="customerName">Full name</label>
+
+          <input id="customerName" name="name" autocomplete="name"
+
+                 required maxlength="100" placeholder="Your full name">
+
+        </div>
+
+        <div class="field">
+
+          <label for="customerEmail">Email address</label>
+
+          <input id="customerEmail" name="email" type="email"
+
+                 autocomplete="email" required maxlength="200"
+
+                 placeholder="you@example.com">
+
+        </div>
+
+        <div class="field">
+
+          <label for="travelDate">Preferred travel date</label>
+
+          <input id="travelDate" name="date" type="date">
+
+        </div>
+
+        <button class="btn btn-lime" type="submit">
+
+          Continue to booking request ↗
+
+        </button>
+
+      </form>
+
+      <div class="notice">
+
+        This form submits a booking inquiry, not a payment.
+
+        Payment is available only after a secure payment provider
+
+        and the corresponding checkout links have been configured.
+
+        Do not send card numbers or security codes by email.
+
+      </div>
+
+    </div>
+
   </div>
-</div>
 
-<script>
-/* ========== TOUR DATA ========== */
-const tours = [
-  {
-    id: 1,
-    name: "Forest Trail Weekend",
-    price: 250,
-    desc: "A relaxing 2-day guided hike through pine forests with campfire nights and stargazing.",
-    img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800"
-  },
-  {
-    id: 2,
-    name: "Mountain Lake Camp",
-    price: 420,
-    desc: "3 days by a crystal-clear alpine lake: kayaking, fishing and sunrise yoga on the shore.",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
-  },
-  {
-    id: 3,
-    name: "Rocky Ridge Expedition",
-    price: 680,
-    desc: "5-day trek across rugged ridges with professional guides, tents and all meals included.",
-    img: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800"
-  },
-  {
-    id: 4,
-    name: "Desert Canyon Adventure",
-    price: 890,
-    desc: "4 days exploring red canyons, night skies and ancient trails with 4x4 support vehicle.",
-    img: "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=800"
-  },
-  {
-    id: 5,
-    name: "Alpine Summit Challenge",
-    price: 1150,
-    desc: "7-day high-altitude expedition to a 4000m peak. For experienced hikers ready to level up.",
-    img: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800"
-  },
-  {
-    id: 6,
-    name: "Northern Lights Safari",
-    price: 1400,
-    desc: "Ultimate 6-day arctic adventure: husky sledding, glass igloos and the aurora borealis.",
-    img: "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=800"
-  }
-];
+  <script>
 
-/* ========== RENDER CARDS ========== */
-const grid = document.getElementById('tourGrid');
-tours.forEach(t => {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.innerHTML = `
-    <img src="${t.img}" alt="${t.name}">
-    <div class="card-body">
-      <h3>${t.name}</h3>
-      <p>${t.desc}</p>
-      <div class="price">$${t.price} <span>/ person</span></div>
-      <button class="buy-btn" onclick="startPurchase(${t.id})">Buy Now</button>
-    </div>
-  `;
-  grid.appendChild(card);
-});
+    // DEMO CATALOG.
 
-/* ========== MODAL LOGIC ========== */
-const overlay = document.getElementById('overlay');
-const modalTitle = document.getElementById('modalTitle');
-const formArea = document.getElementById('formArea');
+    // These are illustrative experiences and prices, not confirmed
 
-let currentTour = null;
-let currentUser = null;
+    // tours, available dates, or existing travel packages.
 
-function openModal(title) {
-  modalTitle.textContent = title;
-  overlay.classList.add('active');
-}
-function closeModal() {
-  overlay.classList.remove('active');
-  formArea.innerHTML = '';
-}
+    const tours = [
 
-/* STEP 1: Registration */
-function startPurchase(tourId) {
-  currentTour = tours.find(t => t.id === tourId);
-  modalTitle.textContent = 'Create Account';
-  formArea.innerHTML = `
-    <p style="color:#94a3b8;font-size:14px;margin-bottom:10px;">
-      You're booking: <b style="color:#4ade80">${currentTour.name}</b> — $${currentTour.price}
-    </p>
-    <label>Full Name</label>
-    <input type="text" id="regName" placeholder="John Doe">
-    <label>Email</label>
-    <input type="email" id="regEmail" placeholder="john@example.com">
-    <label>Password</label>
-    <input type="password" id="regPass" placeholder="••••••••">
-    <button class="btn" onclick="submitRegistration()">Continue to Payment</button>
-  `;
-  openModal('Create Account');
-}
+      {
 
-/* STEP 2: Payment */
-function submitRegistration() {
-  const name = document.getElementById('regName').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPass').value.trim();
+        id: "mountain",
 
-  if (!name || !email || !pass) { alert('Please fill in all fields.'); return; }
-  if (!email.includes('@')) { alert('Please enter a valid email.'); return; }
+        name: "Mountain Wilderness",
 
-  currentUser = { name, email };
-  showPayment();
-}
+        place: "North America",
 
-function showPayment() {
-  modalTitle.textContent = 'Payment';
-  formArea.innerHTML = `
-    <p style="color:#94a3b8;font-size:14px;margin-bottom:10px;">
-      Paying for: <b style="color:#4ade80">${currentTour.name}</b><br>
-      Total: <b style="color:#fff">$${currentTour.price}</b>
-    </p>
-    <label>Card Number</label>
-    <input type="text" id="cardNum" value="4242 4242 4242 4242" maxlength="19">
-    <label>Expiry</label>
-    <input type="text" id="cardExp" value="12/28" maxlength="5">
-    <label>CVV</label>
-    <input type="text" id="cardCvv" value="123" maxlength="3">
-    <label>Email for confirmation</label>
-    <input type="email" id="payEmail" value="${currentUser.email}">
-    <button class="btn" onclick="processPayment()">Pay $${currentTour.price}</button>
-  `;
-}
+        category: "nature",
 
-/* STEP 3: Success + random code */
-function processPayment() {
-  const cardNum = document.getElementById('cardNum').value.replace(/\s/g,'');
-  const payEmail = document.getElementById('payEmail').value.trim();
+        price: 1800,
 
-  if (cardNum.length < 15) { alert('Invalid card number.'); return; }
-  if (!payEmail.includes('@')) { alert('Invalid email.'); return; }
+        currency: "USD",
 
-  const bookingCode = generateCode();
+        duration: "5 days",
 
-  // Save order locally (simulation)
-  const orders = JSON.parse(localStorage.getItem('tourOrders') || '[]');
-  orders.push({
-    user: currentUser.name,
-    email: payEmail,
-    tour: currentTour.name,
-    price: currentTour.price,
-    code: bookingCode,
-    date: new Date().toISOString()
-  });
-  localStorage.setItem('tourOrders', JSON.stringify(orders));
+        label: "Wilderness",
 
-  // Success screen
-  modalTitle.textContent = '✅ Payment Successful';
-  formArea.innerHTML = `
-    <p style="color:#cbd5e1;font-size:15px;margin-bottom:15px;">
-      Thank you, <b style="color:#4ade80">${currentUser.name}</b>!<br>
-      Your booking for <b>${currentTour.name}</b> is confirmed.
-    </p>
-    <div style="background:#0f1419;padding:20px;border-radius:10px;text-align:center;margin-bottom:15px;">
-      <p style="color:#94a3b8;font-size:13px;margin-bottom:8px;">Your Booking Code</p>
-      <p style="color:#4ade80;font-size:28px;font-weight:800;letter-spacing:3px;">${bookingCode}</p>
-    </div>
-    <p style="color:#94a3b8;font-size:14px;">
-      A confirmation with your <b>virtual pass</b> and booking details has been sent to 
-      <b style="color:#fff">${payEmail}</b>.<br><br>
-      Present this code at check-in. Safe travels! 🏕️
-    </p>
-    <button class="btn" onclick="closeModal()">Done</button>
-  `;
-}
+        image: "photo-1464822759023-fed622ff2c3b",
 
-/* Random booking code */
-function generateCode() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let code = 'TC-';
-  for (let i = 0; i < 8; i++) {
-    if (i === 4) code += '-';
-    code += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return code;
-}
+        description: "Mountain landscapes, fresh air, and a carefully planned outdoor escape."
 
-/* Close modal on overlay click */
-overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-</script>
+      },
+
+      {
+
+        id: "forest",
+
+        name: "Forest Escape",
+
+        place: "North America",
+
+        category: "retreat",
+
+        price: 2400,
+
+        currency: "USD",
+
+        duration: "4 days",
+
+        label: "Slow travel",
+
+        image: "photo-1448375240586-882707db888b",
+
+        description: "A peaceful woodland retreat designed for rest and reconnection."
+
+      },
+
+      {
+
+        id: "desert",
+
+        name: "Desert Expedition",
+
+        place: "International",
+
+        category: "adventure",
+
+        price: 3200,
+
+        currency: "USD",
+
+        duration: "6 days",
+
+        label: "Adventure",
+
+        image: "photo-1509316785289-025f5b846b35",
+
+        description: "Discover dramatic desert scenery on an unforgettable expedition."
+
+      },
+
+      {
+
+        id: "lake",
+
+        name: "Lakeside Gathering",
+
+        place: "International",
+
+        category: "nature",
+
+        price: 4500,
+
+        currency: "USD",
+
+        duration: "7 days",
+
+        label: "Nature",
+
+        image: "photo-1470770841072-f978cf4d019e",
+
+        description: "A scenic lakeside getaway with time to explore and unwind."
+
+      },
+
+      {
+
+        id: "summit",
+
+        name: "Alpine Discovery",
+
+        place: "European Alps",
+
+        category: "adventure",
+
+        price: 6200,
+
+        currency: "EUR",
+
+        duration: "8 days",
+
+        label: "Premium",
+
+        image: "photo-1464278533981-50106e6176b1",
+
+        description: "A premium mountain adventure amid spectacular alpine scenery."
+
+      },
+
+      {
+
+        id: "grand",
+
+        name: "Grand Adventure",
+
+        place: "Destination on request",
+
+        category: "retreat",
+
+        price: 8600,
+
+        currency: "EUR",
+
+        duration: "10 days",
+
+        label: "Signature",
+
+        image: "photo-1519681393784-d120267933ba",
+
+        description: "An elevated, customizable journey for travelers seeking something exceptional."
+
+      }
+
+    ];
+
+    // IMPORTANT:
+
+    // Before accepting real payments, create a separate, verified
+
+    // checkout link for each product with your payment provider.
+
+    // Replace the empty strings with those exact URLs.
+
+    // Never put secret API keys in this public file.
+
+    const PAYMENT_LINKS = {
+
+      mountain: "",
+
+      forest: "",
+
+      desert: "",
+
+      lake: "",
+
+      summit: "",
+
+      grand: ""
+
+    };
+
+    let selectedId = null;
+
+    const money = (amount, currency) =>
+
+      new Intl.NumberFormat("en-US", {
+
+        style: "currency",
+
+        currency: currency,
+
+        maximumFractionDigits: 0
+
+      }).format(amount);
+
+    function renderTours(filter = "all") {
+
+      const grid = document.getElementById("tourGrid");
+
+      grid.innerHTML = tours
+
+        .filter(t => filter === "all" || t.category === filter)
+
+        .map(t => `
+
+          <article class="tour">
+
+            <div class="tour-image">
+
+              <img
+
+                src="https://images.unsplash.com/${t.image}?auto=format&fit=crop&w=900&q=80"
+
+                alt="${t.name}"
+
+                loading="lazy">
+
+              <span class="tag">${t.label}</span>
+
+            </div>
+
+            <div class="tour-content">
+
+              <div class="location">⌖ ${t.place}</div>
+
+              <h3>${t.name}</h3>
+
+              <p>${t.description}</p>
+
+              <div class="tour-meta">
+
+                <span>◷ ${t.duration}</span>
+
+                <span>Booking by request</span>
+
+              </div>
+
+              <div class="price-row">
+
+                <div>
+
+                  <div class="price-label">Illustrative price</div>
+
+                  <div class="price">${money(t.price, t.currency)}</div>
+
+                </div>
+
+                <button class="buy"
+
+                  onclick="openBooking('${t.id}')">
+
+                  Select tour ↗
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `).join("");
+
+    }
+
+    document.querySelectorAll(".filter").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        document.querySelectorAll(".filter")
+
+          .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        renderTours(button.dataset.filter);
+
+      });
+
+    });
+
+    function openBooking(id) {
+
+      selectedId = id;
+
+      const tour = tours.find(t => t.id === id);
+
+      document.getElementById("modalTitle").textContent =
+
+        tour ? "Reserve your experience" : "Plan a custom trip";
+
+      document.getElementById("selectedTour").textContent = tour
+
+        ? `${tour.name} — ${money(tour.price, tour.currency)} (illustrative price). Dates and availability require confirmation.`
+
+        : "Tell us about your preferred destination and travel plans.";
+
+      document.getElementById("bookingModal").classList.add("open");
+
+    }
+
+    function closeBooking() {
+
+      document.getElementById("bookingModal").classList.remove("open");
+
+    }
+
+    document.getElementById("bookingModal").addEventListener("click", e => {
+
+      if (e.target.id === "bookingModal") closeBooking();
+
+    });
+
+    document.addEventListener("keydown", e => {
+
+      if (e.key === "Escape") closeBooking();
+
+    });
+
+    document.getElementById("bookingForm").addEventListener("submit", e => {
+
+      e.preventDefault();
+
+      const tour = tours.find(t => t.id === selectedId);
+
+      const paymentUrl = tour && PAYMENT_LINKS[tour.id];
+
+      // A configured payment link opens the provider's checkout.
+
+      // The form details are not automatically transmitted to it.
+
+      if (paymentUrl) {
+
+        if (!paymentUrl.startsWith("https://")) {
+
+          alert("The checkout URL must use HTTPS.");
+
+          return;
+
+        }
+
+        window.location.assign(paymentUrl);
+
+        return;
+
+      }
+
+      // No checkout configured yet: do not pretend to take payment.
+
+      alert(
+
+        "Your booking form is ready, but online payment is not configured yet. " +
+
+        "Connect a secure checkout provider before accepting orders."
+
+      );
+
+    });
+
+    document.getElementById("year").textContent =
+
+      new Date().getFullYear();
+
+    renderTours();
+
+  </script>
 
 </body>
+
 </html>
