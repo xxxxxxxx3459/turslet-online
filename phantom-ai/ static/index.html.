@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHANTOM AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo">PHANTOM<span> AI</span></div>
+            <button class="new-chat" onclick="newChat()">+ Новый чат</button>
+            <div class="side-info">PERSONAL AI SYSTEM</div>
+            <div class="status">● Система готова</div>
+        </aside>
+
+        <main class="main">
+            <header>
+                <span>PHANTOM AI</span>
+                <span class="version">v1.0</span>
+            </header>
+
+            <section class="chat" id="chat">
+                <div class="welcome">
+                    <div class="orb">✦</div>
+                    <h1>Я PHANTOM AI</h1>
+                    <p>Твой интеллектуальный помощник для программирования.</p>
+                </div>
+            </section>
+
+            <div class="input-area">
+                <textarea id="message" placeholder="Напиши сообщение..." rows="1"></textarea>
+                <button id="send" onclick="sendMessage()">➤</button>
+            </div>
+            <p class="footer">PHANTOM AI · PERSONAL INTELLIGENCE</p>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
